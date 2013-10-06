@@ -1,0 +1,27 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+		<h1>{% trans "Make synonyms" %}</h1>
+
+		<p>{% trans "You can choose original for selected synonyms" %}:</p>
+
+		<form method="post" action="{{ path }}">{% csrf_token %}
+			<table>
+				{{ form }}
+			</table>
+			<p>
+				<input type="hidden" name="action" value="makeSynonyms" />
+				<input type="submit" name="cancel" value="{% trans "Cancel" %}" />
+				<input type="submit" name="make_synonyms" value="{% trans "Make synonyms" %}" />
+			</p>
+		</form>
+
+		<h2>{% trans "This action will affect following objects" %}:</h2>
+		<ul>
+			{% for s in synonyms %}
+				<li>{{ s }}</li>
+			{% endfor %}
+		</ul>
+
+	{% endblock %}
